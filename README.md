@@ -4,27 +4,29 @@ A minimal fallback/bridge font for continuous em-dash shaping, derived from **CJ
 
 ## What it does
 
-Em Dash Bridge intentionally exposes only one Unicode character:
+Em Dash Bridge exposes only the three Unicode characters needed for em-dash use:
 
 - `U+2014 — EM DASH`
+- `U+2E3A ⸺ TWO-EM DASH`
+- `U+2E3B ⸻ THREE-EM DASH`
 
 Its OpenType shaping logic is deliberately universal and language-neutral:
 
-- `——` → one continuous two-em dash glyph
-- `———` → one continuous three-em dash glyph
+- `——` → the same continuous two-em dash glyph used by `⸺`
+- `———` → the same continuous three-em dash glyph used by `⸻`
 
 The substitutions are implemented in `ccmp` under the OpenType `DFLT` script. There is no `locl` matrix and no Chinese/Japanese/Korean/Western language distinction: the same rule applies everywhere.
 
-`U+2E3A TWO-EM DASH` and `U+2E3B THREE-EM DASH` are **not** exposed through cmap. Their outlines remain only as internal ligature outputs required to shape repeated `U+2014`.
+The direct `U+2E3A` and `U+2E3B` mappings reuse the exact glyphs that serve as the two- and three-character `ccmp` ligature outputs, so they add no extra outlines.
 
 ## Deliberately removed
 
-- All punctuation other than `U+2014`
-- Direct cmap mappings for `U+2015`, `U+2E3A`, `U+2E3B`, and other dash-like characters
+- All punctuation other than `U+2014`, `U+2E3A`, and `U+2E3B`
+- `U+2015` and other dash-like characters
 - `locl` and all language/region-specific shaping branches
 - Unrelated GSUB/GPOS behavior
 
-The resulting static fonts contain only four glyphs including `.notdef`.
+The resulting static fonts still contain only four glyphs including `.notdef`.
 
 ## Builds
 
