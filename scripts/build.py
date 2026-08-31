@@ -73,9 +73,9 @@ def subset_font(src, dst):
     opts.glyph_names = True
 
     sub = subset.Subsetter(options=opts)
-    # Only U+2014 is public. U+2E3A/U+2E3B survive solely as internal
-    # ligature-output glyphs required by the ccmp closure.
-    sub.populate(unicodes=[0x2014])
+    # Expose U+2014 plus the Unicode two-em/three-em dash characters.
+    # U+2E3A/U+2E3B reuse the same glyphs used as ccmp ligature outputs.
+    sub.populate(unicodes=[0x2014, 0x2E3A, 0x2E3B])
     sub.subset(font)
 
     # Replace the inherited multilingual GSUB matrix with one universal
