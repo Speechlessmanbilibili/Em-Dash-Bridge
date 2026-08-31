@@ -4,29 +4,32 @@ A minimal fallback/bridge font for continuous em-dash shaping, derived from **CJ
 
 ## What it does
 
-Em Dash Bridge exposes only the three Unicode characters needed for em-dash use:
+Em Dash Bridge exposes only the four Unicode characters needed for its dash shaping:
 
-- `U+2014 — EM DASH`
-- `U+2E3A ⸺ TWO-EM DASH`
-- `U+2E3B ⸻ THREE-EM DASH`
+- `U+2014` — EM DASH
+- `U+2015` ― HORIZONTAL BAR
+- `U+2E3A` ⸺ TWO-EM DASH
+- `U+2E3B` ⸻ THREE-EM DASH
 
 Its OpenType shaping logic is deliberately universal and language-neutral:
 
 - `——` → the same continuous two-em dash glyph used by `⸺`
 - `———` → the same continuous three-em dash glyph used by `⸻`
+- `――` → the retained continuous two-character HORIZONTAL BAR ligature
+- `―――` → the retained continuous three-character HORIZONTAL BAR ligature
 
-The substitutions are implemented in `ccmp` under the OpenType `DFLT` script. There is no `locl` matrix and no Chinese/Japanese/Korean/Western language distinction: the same rule applies everywhere.
+The substitutions are implemented in `ccmp` under the OpenType `DFLT` script. There is no `locl` matrix and no Chinese/Japanese/Korean/Western language distinction: the same rules apply everywhere.
 
-The direct `U+2E3A` and `U+2E3B` mappings reuse the exact glyphs that serve as the two- and three-character `ccmp` ligature outputs, so they add no extra outlines.
+The direct `U+2E3A` and `U+2E3B` mappings reuse the exact glyphs that serve as the two- and three-character `U+2014` ligature outputs, so they add no extra outlines.
 
 ## Deliberately removed
 
-- All punctuation other than `U+2014`, `U+2E3A`, and `U+2E3B`
-- `U+2015` and other dash-like characters
+- All punctuation other than `U+2014`, `U+2015`, `U+2E3A`, and `U+2E3B`
+- Other dash- and hyphen-like characters outside those four code points
 - `locl` and all language/region-specific shaping branches
 - Unrelated GSUB/GPOS behavior
 
-The resulting static fonts still contain only four glyphs including `.notdef`.
+Each built font contains only seven glyphs including `.notdef`: the four directly mapped characters plus the two retained `U+2015` ligature outputs, with `U+2E3A`/`U+2E3B` also serving as the `U+2014` ligature outputs.
 
 ## Builds
 
