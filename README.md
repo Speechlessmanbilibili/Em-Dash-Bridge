@@ -1,41 +1,46 @@
 # Em Dash Bridge
 
-A minimal punctuation bridge extracted from *+CJK Punct Bridge ?! V1.3.4**, containing only the dash characters and OpenType shaping needed for its continuous CJK em-dash behavior.
+A minimal fallback/bridge font for continuous em-dash shaping, derived from **CJK Punct Bridge ?! v1.3.4**.
 
-## Coverage
+## What it does
 
-The public cmap contains only:
+Em Dash Bridge intentionally exposes only one Unicode character:
 
-- `U+2014` EM DASH (b—)
-- `U+2015`. HORIZONTAL BAR (`‗`)
-- `U+2E3A` TWO-EM DASH (`⸺`)
-- `U+2E3B` THREE-EM DASH (`⸻`)
+- `U+2014 — EM DASH`
 
-`U+2014` and `U+2015`. retain the original two- and three-character ligature substitutions. The required CJK-localized ligature outputs are retained through `ccmp` and `locl`. Other dash/hyphen characters that do not participate in this continuous-dash shaping system are intentionally excluded.
+Its OpenType shaping logic is deliberately universal and language-neutral:
 
-This makes the font suitable as a very narrow fallback/override font for dash shaping without taking over ordinary punctuation or text.
+- `——` → one continuous two-em dash glyph
+- `———` → one continuous three-em dash glyph
 
-## Fonts
+The substitutions are implemented in `ccmp` under the OpenType `DFLT` script. There is no `locl` matrix and no Chinese/Japanese/Korean/Western language distinction: the same rule applies everywhere.
 
-Release packages contain:
+`U+2E3A TWO-EM DASH` and `U+2E3B THREE-EM DASH` are **not** exposed through cmap. Their outlines remain only as internal ligature outputs required to shape repeated `U+2014`.
 
-- Upright variable TTF/WOFF2
-- Italic variable TTF/WOFF2
-- Static Thin, ExtraLight, Light, Regular, Medium, SemiBold, Bold, ExtraBold and Black
-- Matching italic static faces
+## Deliberately removed
 
-Each TTF contains only 21 glyphs including `.notdef` and the internal localized/ligature glyphs required by the retained shaping rules.
+- All punctuation other than `U+2014`
+- Direct cmap mappings for `U+2015`, `U+2E3A`, `U+2E3B`, and other dash-like characters
+- `locl` and all language/region-specific shaping branches
+- Unrelated GSUB/GPOS behavior
 
-## Build
+The resulting static fonts contain only four glyphs including `.notdef`.
 
-Requires Python and fontTools with Brotli support for WOFF2.
+## Builds
+
+The build produces upright and italic variable fonts plus nine static weights for each style, in both TTF and WOFF2.
+
+To rebuild from an extracted `CJKPunctBridgeInterrobang-v1.3.4.zip` directory:
 
 ```bash
-python scripts/build.py /path/to/CJKPunctBridgeInterrobang-v1.3.4 /path/to/output
+pip install -r requirements.txt
+python scripts/build.py /path/to/extracted/source dist
 ```
 
-The v1.0.0 release was built from `CJKPunctBridgeInterrobang-v1.3.4.zip` (SHA-256 `3e3126cf5fca3163b43d4d34a7cbb3401866350fb8ef4d230defcba918aa35ef`).
+The source package used for the initial derivation was `CJKPunctBridgeInterrobang-v1.3.4.zip`, SHA-256:
+
+`3e3126cf5dca3163b43d4d34a7cbb3401866350fb8ef4d230defcba918aa35ef`
 
 ## License
 
-Em Dash Bridge is a modified font distributed under the SIL Open Font License 1.1. See `OFL.txt` and `THIRD_PARTY_NOTICES.md`.
+Em Dash Bridge is a modified font distributed under the **SIL Open Font License 1.1**. See `OFL.txt` and `THIRD_PARTY_NOTICES.md`.
