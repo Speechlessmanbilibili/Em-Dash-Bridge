@@ -4,6 +4,8 @@
 
 当前版本为 **`v1.0.2`**，可在 [GitHub Releases](https://github.com/Speechlessmanbilibili/Em-Dash-Bridge/releases/latest) 下载。
 
+![Em Dash Bridge 与鸿蒙黑体破折号对比](docs/assets/em-dash-specimen.png)
+
 ## 它做什么？
 
 每款字体仅包含 **7 个字形**（含 `.notdef`），公开 `cmap` 仅覆盖 4 个破折号相关码位，其余所有字符全部直接透传给后续字体：
