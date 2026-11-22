@@ -44,9 +44,9 @@ def rename_font(font, src_name):
     replacements = {
         1: family,
         2: style,
-        3: f'1.001;SilentPerson;{psname}',
+        3: f'1.002;SilentPerson;{psname}',
         4: full,
-        5: 'Version 1.001',
+        5: 'Version 1.002',
         6: psname,
         16: family,
         17: style,

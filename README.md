@@ -1,6 +1,6 @@
 # Em Dash Bridge
 
-A minimal fallback/bridge font for continuous em-dash shaping, derived from **CJK Punct Bridge ?! v1.3.4**.
+A minimal fallback/bridge font for continuous em-dash shaping, derived from **CJK Punct Bridge ?! v1.3.5**.
 
 ## What it does
 
@@ -35,16 +35,16 @@ Each built font contains only seven glyphs including `.notdef`: the four directl
 
 The build produces upright and italic variable fonts plus nine static weights for each style, in both TTF and WOFF2.
 
-To rebuild from an extracted `CJKPunctBridgeInterrobang-v1.3.4.zip` directory:
+To rebuild from an extracted `CJKPunctBridgeInterrobang-v1.3.5.zip` directory:
 
 ```bash
 pip install -r requirements.txt
 python scripts/build.py /path/to/extracted/source dist
 ```
 
-The source package used for the initial derivation was `CJKPunctBridgeInterrobang-v1.3.4.zip`, SHA-256:
+The source package used for this build was `CJKPunctBridgeInterrobang-v1.3.5.zip`, SHA-256:
 
-`3e3126cf5dca3163b43d4d34a7cbb3401866350fb8ef4d230defcba918aa35ef`
+`5554f37832a6cff1ecf4c0815216be73c40176a6c781b9b3df87b0083129afce`
 
 ## License
 
